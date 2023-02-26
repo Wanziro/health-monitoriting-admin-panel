@@ -33,11 +33,6 @@ const _nav = [
         name: 'View All',
         to: '/departments',
       },
-      {
-        component: CNavItem,
-        name: 'Add New',
-        to: '/adddepartment',
-      },
     ],
   },
 ]
