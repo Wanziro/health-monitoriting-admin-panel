@@ -7,6 +7,7 @@ const Dashboard = lazy(() => import('../../views/dashboard'))
 const Profile = lazy(() => import('../../views/profile'))
 const Users = lazy(() => import('../../views/lab/users'))
 const Departments = lazy(() => import('../../views/lab/departments'))
+const Beds = lazy(() => import('../../views/lab/beds'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -14,6 +15,7 @@ const routes = [
   { path: '/profile', name: 'Profile', element: Profile },
   { path: '/users', name: 'Users', element: Users },
   { path: '/departments', name: 'departments', element: Departments },
+  { path: '/beds', name: 'beds', element: Beds },
   // {
   //   path: '/notifications',
   //   name: 'Notifications',
