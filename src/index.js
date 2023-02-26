@@ -1,15 +1,19 @@
 import 'react-app-polyfill/stable'
 import 'core-js'
+import 'react-toastify/dist/ReactToastify.css'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
-import store from './store'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Store, persistor } from './store'
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
+  <Provider store={Store}>
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
 )
 

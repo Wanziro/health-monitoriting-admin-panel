@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
-import routes from '../routes'
+import labRoutes from '../sub-routes/lab'
 
 import { CBreadcrumb, CBreadcrumbItem } from '@coreui/react'
+import { useSelector } from 'react-redux'
 
 const AppBreadcrumb = () => {
   const currentLocation = useLocation().pathname
+  const { role } = useSelector((state) => state.user)
+  const [routesToUse, setRoutesToUse] = useState([])
 
-  const getRouteName = (pathname, routes) => {
-    const currentRoute = routes.find((route) => route.path === pathname)
+  useEffect(() => {
+    if (role === 'admin') {
+      setRoutesToUse(labRoutes)
+    }
+  }, [role])
+
+  const getRouteName = (pathname, routesToUse) => {
+    const currentRoute = routesToUse.find((route) => route.path === pathname)
     return currentRoute ? currentRoute.name : false
   }
 
@@ -17,7 +26,7 @@ const AppBreadcrumb = () => {
     const breadcrumbs = []
     location.split('/').reduce((prev, curr, index, array) => {
       const currentPathname = `${prev}/${curr}`
-      const routeName = getRouteName(currentPathname, routes)
+      const routeName = getRouteName(currentPathname, routesToUse)
       routeName &&
         breadcrumbs.push({
           pathname: currentPathname,
