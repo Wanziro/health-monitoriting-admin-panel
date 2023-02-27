@@ -116,7 +116,7 @@ const Users = () => {
 
   const handleDelete = (id) => {
     dispatch(setShowFullPageLoader(true))
-    Axios.delete(BACKEND_URL + '/beds/' + id + '/?token=' + token)
+    Axios.delete(BACKEND_URL + '/patients/' + id + '/?token=' + token)
       .then((res) => {
         setTimeout(() => {
           dispatch(setShowFullPageLoader(false))
