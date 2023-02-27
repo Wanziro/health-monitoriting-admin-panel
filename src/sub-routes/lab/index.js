@@ -8,6 +8,8 @@ const Profile = lazy(() => import('../../views/profile'))
 const Users = lazy(() => import('../../views/lab/users'))
 const Departments = lazy(() => import('../../views/lab/departments'))
 const Beds = lazy(() => import('../../views/lab/beds'))
+const Patients = lazy(() => import('../../views/lab/patients'))
+const AddPatients = lazy(() => import('../../views/lab/add-patients'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -16,6 +18,8 @@ const routes = [
   { path: '/users', name: 'Users', element: Users },
   { path: '/departments', name: 'departments', element: Departments },
   { path: '/beds', name: 'beds', element: Beds },
+  { path: '/patients', name: 'patients', element: Patients },
+  { path: '/addpatient', name: 'addpatient', element: AddPatients },
   // {
   //   path: '/notifications',
   //   name: 'Notifications',

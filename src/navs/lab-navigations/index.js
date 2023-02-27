@@ -6,6 +6,7 @@ import {
   cilBell,
   cilGraph,
   cilPencil,
+  cilPeople,
   cilSpeedometer,
   cilUser,
 } from '@coreui/icons'
@@ -47,6 +48,24 @@ const _nav = [
         component: CNavItem,
         name: 'View All',
         to: '/beds',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Patients',
+    to: '/patients',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'View All',
+        to: '/patients',
+      },
+      {
+        component: CNavItem,
+        name: 'Add New',
+        to: '/addpatient',
       },
     ],
   },
