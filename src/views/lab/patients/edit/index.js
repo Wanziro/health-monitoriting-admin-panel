@@ -22,6 +22,7 @@ const initialState = {
   sex: '',
   medication: '',
   medicalHistory: '',
+  email: '',
 }
 function Edit({ showModal, setShowModal, editItem, token, fetchData, departments, beds }) {
   const [state, setState] = useState(initialState)
@@ -166,6 +167,18 @@ function Edit({ showModal, setShowModal, editItem, token, fetchData, departments
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
+            </div>
+            <div className="mb-3">
+              <label>Weight</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Patient email address"
+                name="email"
+                value={state.email}
+                onChange={changeHandler}
+                required
+              />
             </div>
             <div className="mb-3">
               <label>Medication</label>

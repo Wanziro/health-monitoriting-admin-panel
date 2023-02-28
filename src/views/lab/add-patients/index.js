@@ -20,6 +20,7 @@ const initialState = {
   sex: '',
   medication: '',
   medicalHistory: '',
+  email: '',
 }
 
 const AddPatients = () => {
@@ -226,6 +227,20 @@ const AddPatients = () => {
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select>
+                    </div>
+                  </CCol>
+                  <CCol md={6}>
+                    <div className="mb-3">
+                      <label>Weight</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Patient email address"
+                        name="email"
+                        value={state.email}
+                        onChange={changeHandler}
+                        required
+                      />
                     </div>
                   </CCol>
                   <CCol md={6}>
