@@ -231,7 +231,7 @@ const AddPatients = () => {
                   </CCol>
                   <CCol md={6}>
                     <div className="mb-3">
-                      <label>Weight</label>
+                      <label>Email</label>
                       <input
                         type="email"
                         className="form-control"

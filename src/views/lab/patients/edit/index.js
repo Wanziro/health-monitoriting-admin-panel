@@ -169,7 +169,7 @@ function Edit({ showModal, setShowModal, editItem, token, fetchData, departments
               </select>
             </div>
             <div className="mb-3">
-              <label>Weight</label>
+              <label>Email</label>
               <input
                 type="email"
                 className="form-control"
