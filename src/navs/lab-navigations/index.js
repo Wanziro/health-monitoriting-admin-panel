@@ -52,22 +52,10 @@ const _nav = [
     icon: <CIcon icon={cilBed} customClassName="nav-icon" />,
   },
   {
-    component: CNavGroup,
-    name: 'Patients',
+    component: CNavItem,
+    name: 'Patient Management',
     to: '/patients',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'View All',
-        to: '/patients',
-      },
-      {
-        component: CNavItem,
-        name: 'Add New',
-        to: '/addpatient',
-      },
-    ],
   },
 ]
 
