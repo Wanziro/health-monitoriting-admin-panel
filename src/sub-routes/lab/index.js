@@ -10,6 +10,7 @@ const Departments = lazy(() => import('../../views/lab/departments'))
 const Beds = lazy(() => import('../../views/lab/beds'))
 const Patients = lazy(() => import('../../views/lab/patients'))
 const AddPatients = lazy(() => import('../../views/lab/add-patients'))
+const Instructions = lazy(() => import('../../views/lab/instructions'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -20,6 +21,7 @@ const routes = [
   { path: '/beds', name: 'beds', element: Beds },
   { path: '/patients', name: 'patients', element: Patients },
   { path: '/addpatient', name: 'addpatient', element: AddPatients },
+  { path: '/instructions', name: 'addpatient', element: Instructions },
   // {
   //   path: '/notifications',
   //   name: 'Notifications',

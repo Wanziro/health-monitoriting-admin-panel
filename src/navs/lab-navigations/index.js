@@ -4,6 +4,7 @@ import {
   cilBarChart,
   cilBed,
   cilBell,
+  cilBellExclamation,
   cilGraph,
   cilPencil,
   cilPeople,
@@ -18,6 +19,12 @@ const _nav = [
     name: 'Dashboard',
     to: '/dashboard',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Instructions',
+    to: '/instructions',
+    icon: <CIcon icon={cilBellExclamation} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
@@ -39,17 +46,10 @@ const _nav = [
     ],
   },
   {
-    component: CNavGroup,
-    name: 'Beds',
+    component: CNavItem,
+    name: 'Bed Management',
     to: '/beds',
     icon: <CIcon icon={cilBed} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'View All',
-        to: '/beds',
-      },
-    ],
   },
   {
     component: CNavGroup,
