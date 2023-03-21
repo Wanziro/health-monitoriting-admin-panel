@@ -16,19 +16,21 @@ const Users = () => {
   const { isLoading } = useSelector((state) => state.app)
   const [userRole, setUserRole] = useState('')
   const [fullName, setFullName] = useState('')
+  const [phone, setphone] = useState('')
   const [email, setEmail] = useState('')
   const [isLoading2, setIsLoading2] = useState(false)
   const [usersList, setUsersList] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (fullName.trim() === '' || email.trim() === '' || userRole.trim() === '') {
+    if (fullName.trim() === '' || phone.trim() === '' || userRole.trim() === '') {
       toastMessage('error', 'All fields on the form are required')
     } else {
       dispatch(setShowFullPageLoader(true))
       Axios.post(BACKEND_URL + '/users/register/', {
         fullName,
         email,
+        phone,
         password: '12345',
         role: userRole,
         token,
@@ -37,6 +39,7 @@ const Users = () => {
           dispatch(setShowFullPageLoader(false))
           setFullName('')
           setEmail('')
+          setphone('')
           setUserRole('')
           toastMessage('success', res.data.msg)
           setUsersList([...usersList, res.data.user])
@@ -105,6 +108,7 @@ const Users = () => {
                       <tr>
                         <th>#</th>
                         <th>Names</th>
+                        <th>Phone</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Action</th>
@@ -115,6 +119,7 @@ const Users = () => {
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>{item.fullName}</td>
+                          <td>{item.phone}</td>
                           <td>{item.email}</td>
                           <td>{item.role}</td>
                           <td>
@@ -157,12 +162,23 @@ const Users = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label>Email</label>
+                  <label>Phone Number</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    placeholder="User's Phone Number"
+                    required
+                    name="phone"
+                    value={phone}
+                    onChange={(e) => setphone(e.target.value)}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label>Email (optional)</label>
                   <input
                     type="email"
                     className="form-control"
                     placeholder="User's Email address"
-                    required
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
