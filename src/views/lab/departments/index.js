@@ -9,6 +9,7 @@ import PlaceHolder from 'src/components/placeholder'
 import CIcon from '@coreui/icons-react'
 import { cilPen, cilTrash } from '@coreui/icons'
 import FullPageLoader from 'src/components/full-page-loader'
+import ReactPaginate from 'react-paginate'
 import Edit from './edit'
 
 const initialState = {
@@ -27,6 +28,9 @@ const Users = () => {
 
   const [isLoading2, setIsLoading2] = useState(false)
   const [usersList, setUsersList] = useState([])
+  const [allUsersList, setAllUsersList] = useState([])
+
+  const [keyword, setKeyword] = useState('')
 
   const changeHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -47,6 +51,7 @@ const Users = () => {
           setState(initialState)
           toastMessage('success', res.data.msg)
           setUsersList([...usersList, res.data.department])
+          setAllUsersList([...allUsersList, res.data.department])
         })
         .catch((error) => {
           errorHandler(error)
@@ -66,6 +71,7 @@ const Users = () => {
         setTimeout(() => {
           setIsLoading2(false)
           setUsersList(res.data.departments)
+          setAllUsersList(res.data.departments)
         }, 1000)
       })
       .catch((error) => {
@@ -94,13 +100,54 @@ const Users = () => {
       })
   }
 
+  useEffect(() => {
+    console.log({ keyword })
+    console.log({ allUsersList })
+    if (keyword.trim().length === 0) {
+      setUsersList(allUsersList)
+    } else {
+      const res = allUsersList.filter(
+        (item) =>
+          item.name.toLowerCase().includes(keyword.toLowerCase()) ||
+          item.createdAt.toLowerCase().includes(keyword.toLowerCase()),
+      )
+      setUsersList(res)
+    }
+  }, [keyword])
+
+  // pagination
+  const [itemsPerPage, setItemsPerPage] = useState(5)
+  const [itemOffset, setItemOffset] = useState(0)
+  const endOffset = itemOffset + itemsPerPage
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`)
+  const currentItems = usersList.slice(itemOffset, endOffset)
+  const pageCount = Math.ceil(usersList.length / itemsPerPage)
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % usersList.length
+    console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`)
+    setItemOffset(newOffset)
+  }
+
   return (
     <>
       <CRow>
         <CCol md={9}>
           <CCard className="mb-4">
             <CCardHeader>
-              <strong>Departments</strong>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <strong>Departments</strong>
+                </div>
+                <div>
+                  <input
+                    onChange={(e) => setKeyword(e.target.value)}
+                    className="form-control"
+                    placeholder="Search by name, date"
+                  />
+                </div>
+              </div>
             </CCardHeader>
             <CCardBody>
               {isLoading2 ? (
@@ -119,7 +166,7 @@ const Users = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {usersList.map((item, index) => (
+                      {currentItems.map((item, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
                           <td>{item.name}</td>
@@ -156,6 +203,37 @@ const Users = () => {
                       ))}
                     </tbody>
                   </table>
+                  <div className="pagination-main-container">
+                    <div>
+                      <select
+                        className="form-select"
+                        value={itemsPerPage}
+                        onChange={(e) => setItemsPerPage(e.target.value)}
+                      >
+                        <option value={5}>5</option>
+                        <option value={10}>10</option>
+                        <option value={20}>20</option>
+                        <option value={30}>30</option>
+                        <option value={40}>40</option>
+                        <option value={50}>50</option>
+                      </select>
+                    </div>
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel=">"
+                      onPageChange={handlePageClick}
+                      pageRangeDisplayed={5}
+                      pageCount={pageCount}
+                      previousLabel="<"
+                      renderOnZeroPageCount={null}
+                      containerClassName="paginationContainer"
+                      pageClassName="pageClassName"
+                      activeClassName="activeClassName"
+                      previousClassName="previousClassName"
+                      nextClassName="previousClassName"
+                      disabledLinkClassName="disabledLinkClassName"
+                    />
+                  </div>
                 </div>
               )}
             </CCardBody>

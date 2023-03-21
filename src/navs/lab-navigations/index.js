@@ -33,17 +33,10 @@ const _nav = [
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
   {
-    component: CNavGroup,
-    name: 'Departments',
+    component: CNavItem,
+    name: 'Departments Management',
     to: '/departments',
     icon: <CIcon icon={cilBarChart} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'View All',
-        to: '/departments',
-      },
-    ],
   },
   {
     component: CNavItem,
