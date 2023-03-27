@@ -62,9 +62,9 @@ const Dashboard = () => {
     <>
       <CRow>
         <CCol md={3}>
-          <CCard className="mb-4">
+          <CCard className="mb-4 bg-primary">
             <CCardBody>
-              <div className="text-center">
+              <div className="text-center text-white">
                 <h3>{users.length}</h3>
                 <span>Users</span>
               </div>
@@ -72,9 +72,9 @@ const Dashboard = () => {
           </CCard>
         </CCol>
         <CCol md={3}>
-          <CCard className="mb-4">
+          <CCard className="mb-4 bg-info">
             <CCardBody>
-              <div className="text-center">
+              <div className="text-center text-white">
                 <h3>{departments.length}</h3>
                 <span>Departments</span>
               </div>
@@ -82,9 +82,9 @@ const Dashboard = () => {
           </CCard>
         </CCol>
         <CCol md={3}>
-          <CCard className="mb-4">
+          <CCard className="mb-4 bg-warning">
             <CCardBody>
-              <div className="text-center">
+              <div className="text-center text-white">
                 <h3>{beds.length}</h3>
                 <span>Beds</span>
               </div>
@@ -92,9 +92,9 @@ const Dashboard = () => {
           </CCard>
         </CCol>
         <CCol md={3}>
-          <CCard className="mb-4">
+          <CCard className="mb-4 bg-secondary">
             <CCardBody>
-              <div className="text-center">
+              <div className="text-center text-white">
                 <h3>{patients.length}</h3>
                 <span>Patients</span>
               </div>
