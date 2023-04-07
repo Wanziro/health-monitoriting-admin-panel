@@ -30,7 +30,16 @@ const AppSidebar = () => {
         H.M.S
       </CSidebarBrand>
       <CSidebarNav>
-        <SimpleBar>{role === 'admin' && <AppSidebarNav items={labNav} />}</SimpleBar>
+        <SimpleBar>
+          {role === 'admin' && <AppSidebarNav items={labNav} />}
+          <a
+            href="https://turatsinzejunior83-diseases-prediction-main-8emypz.streamlit.app/"
+            target="_blank"
+            style={{ color: '#fff', padding: '1rem', marginLeft: '3rem' }}
+          >
+            Prediction Portal
+          </a>
+        </SimpleBar>
       </CSidebarNav>
       <CSidebarToggler
         className="d-none d-lg-flex"
