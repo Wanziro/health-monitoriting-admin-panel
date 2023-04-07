@@ -102,6 +102,14 @@ const Dashboard = () => {
           </CCard>
         </CCol>
       </CRow>
+      <div className="text-center">
+        <a
+          href="https://turatsinzejunior83-diseases-prediction-main-8emypz.streamlit.app/"
+          target="_blank"
+        >
+          Prediction Portal
+        </a>
+      </div>
     </>
   )
 }
