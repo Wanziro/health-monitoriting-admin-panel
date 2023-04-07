@@ -44,13 +44,13 @@ const Login = () => {
     } else {
       setIsLoading(true)
       Axios.post(BACKEND_URL + '/users/login', {
-        email,
+        phone: email,
         password,
       })
         .then((res) => {
           setTimeout(() => {
             dispatch(setUserFullName(res.data.fullName))
-            dispatch(setUserEmail(res.data.email))
+            dispatch(setUserPhone(res.data.phone))
             dispatch(setUserRole(res.data.role))
             dispatch(setUserToken(res.data.token))
             setIsLoading(false)
@@ -89,8 +89,9 @@ const Login = () => {
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
                       <CFormInput
-                        placeholder="Email"
-                        autoComplete="Email"
+                        placeholder="Phone"
+                        type="text"
+                        name="Phone"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
