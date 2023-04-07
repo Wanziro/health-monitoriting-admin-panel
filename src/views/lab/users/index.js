@@ -119,11 +119,14 @@ const Users = () => {
     if (keyword.trim().length === 0) {
       setUsersList(allUsersList)
     } else {
-      const res = allUsersList.filter(
-        (item) =>
-          item.departmentId === keyword || item.phone.toLowerCase().includes(keyword.toLowerCase()),
-      )
-      setUsersList(res)
+      try {
+        const res = allUsersList.filter(
+          (item) =>
+            item.departmentId === keyword ||
+            item.phone.toLowerCase().includes(keyword.toLowerCase()),
+        )
+        setUsersList(res)
+      } catch (error) {}
     }
   }, [keyword])
 
