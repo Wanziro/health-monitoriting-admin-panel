@@ -17,9 +17,12 @@ const Users = () => {
   const [userRole, setUserRole] = useState('')
   const [fullName, setFullName] = useState('')
   const [phone, setphone] = useState('')
-  const [email, setEmail] = useState('')
+  const [departmentId, setDepartmentId] = useState('')
   const [isLoading2, setIsLoading2] = useState(false)
+  const [allUsersList, setAllUsersList] = useState([])
   const [usersList, setUsersList] = useState([])
+  const [departments, setDepartments] = useState([])
+  const [keyword, setKeyword] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -29,8 +32,8 @@ const Users = () => {
       dispatch(setShowFullPageLoader(true))
       Axios.post(BACKEND_URL + '/users/register/', {
         fullName,
-        email,
-        phone,
+        phone: phone.trim(),
+        departmentId,
         password: '12345',
         role: userRole,
         token,
@@ -38,9 +41,9 @@ const Users = () => {
         .then((res) => {
           dispatch(setShowFullPageLoader(false))
           setFullName('')
-          setEmail('')
           setphone('')
           setUserRole('')
+          setDepartmentId()
           toastMessage('success', res.data.msg)
           setUsersList([...usersList, res.data.user])
         })
@@ -53,7 +56,20 @@ const Users = () => {
 
   useEffect(() => {
     fetchUsers()
+    fetDepartments()
   }, [])
+
+  const fetDepartments = () => {
+    Axios.get(BACKEND_URL + '/departments/?token=' + token)
+      .then((res) => {
+        setDepartments(res.data.departments)
+      })
+      .catch((error) => {
+        setTimeout(() => {
+          errorHandler(error)
+        }, 1000)
+      })
+  }
 
   const fetchUsers = () => {
     setIsLoading2(true)
@@ -61,6 +77,7 @@ const Users = () => {
       .then((res) => {
         setTimeout(() => {
           setIsLoading2(false)
+          setAllUsersList(res.data.users)
           setUsersList(res.data.users)
         }, 1000)
       })
@@ -90,13 +107,63 @@ const Users = () => {
       })
   }
 
+  const getDepName = (id) => {
+    const dep = departments.find((item) => item._id == id)
+    if (dep) {
+      return dep.name
+    }
+    return ''
+  }
+
+  useEffect(() => {
+    if (keyword.trim().length === 0) {
+      setUsersList(allUsersList)
+    } else {
+      const res = allUsersList.filter(
+        (item) =>
+          item.departmentId === keyword || item.phone.toLowerCase().includes(keyword.toLowerCase()),
+      )
+      setUsersList(res)
+    }
+  }, [keyword])
+
   return (
     <>
       <CRow>
         <CCol md={8}>
           <CCard className="mb-4">
             <CCardHeader>
-              <strong>System Users</strong>
+              <div className="d-flex justify-content-between">
+                <strong>Account Management</strong>{' '}
+                <div>
+                  <table>
+                    <tr>
+                      <td>
+                        <input
+                          onChange={(e) => setKeyword(e.target.value)}
+                          className="form-control"
+                          placeholder="Search by phone"
+                        />
+                      </td>
+                      <td>&nbsp;&nbsp;</td>
+                      <td>
+                        <select
+                          name="departmentId"
+                          value={departmentId}
+                          onChange={(e) => setKeyword(e.target.value)}
+                          required
+                          className="form-select"
+                        >
+                          <option value="">Department</option>
+                          {departments.map((item, index) => (
+                            <option value={item._id}>{item.name}</option>
+                          ))}
+                        </select>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
             </CCardHeader>
             <CCardBody>
               {isLoading2 ? (
@@ -107,10 +174,10 @@ const Users = () => {
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Names</th>
                         <th>Phone</th>
-                        <th>Email</th>
+                        <th>Names</th>
                         <th>Role</th>
+                        <th>Department</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -118,10 +185,10 @@ const Users = () => {
                       {usersList.map((item, index) => (
                         <tr key={index}>
                           <td>{index + 1}</td>
-                          <td>{item.fullName}</td>
                           <td>{item.phone}</td>
-                          <td>{item.email}</td>
+                          <td>{item.fullName}</td>
                           <td>{item.role}</td>
+                          <td>{getDepName(item.departmentId)}</td>
                           <td>
                             <button
                               className="btn btn-danger"
@@ -174,15 +241,19 @@ const Users = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label>Email (optional)</label>
-                  <input
-                    type="email"
+                  <label>Binding Departments</label>
+                  <select
+                    name="departmentId"
+                    value={departmentId}
+                    onChange={(e) => setDepartmentId(e.target.value)}
+                    required
                     className="form-control"
-                    placeholder="User's Email address"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                  >
+                    <option value="">Select Department</option>
+                    {departments.map((item, index) => (
+                      <option value={item._id}>{item.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="mb-3">
                   <label>Role</label>
