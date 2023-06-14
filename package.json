@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "ninga.fab@gmail.com",
   "scripts": {
+    "install": "npm install --force",
     "build": "react-scripts build",
     "start": "env-cmd -f ./.env.dev react-scripts start",
     "start:production": "env-cmd -f ./.env.production react-scripts start"
