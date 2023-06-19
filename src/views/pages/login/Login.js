@@ -72,7 +72,13 @@ const Login = () => {
   }
 
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+    <div
+      className="bg-light min-vh-100 d-flex flex-row align-items-center"
+      style={{
+        backgroundImage: `url(${require('../../../assets/bg.jpeg')})`,
+        backgroundSize: '100% 100%',
+      }}
+    >
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={5}>

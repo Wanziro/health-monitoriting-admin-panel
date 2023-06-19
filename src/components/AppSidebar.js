@@ -35,7 +35,7 @@ const AppSidebar = () => {
           <a
             href="https://turatsinzejunior83-diseases-prediction-main-8emypz.streamlit.app/"
             target="_blank"
-            style={{ color: '#fff', padding: '1rem', marginLeft: '3rem' }}
+            style={{ color: 'rgba(255,255,255,0.6)', padding: '1rem', marginLeft: '3rem' }}
           >
             Prediction Portal
           </a>
