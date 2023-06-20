@@ -34,6 +34,9 @@ const Users = () => {
   const [departments, setDepartments] = useState([])
   const [keyword, setKeyword] = useState('')
 
+  const [showAlert, setShowAlert] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(undefined)
+
   const changeHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
@@ -121,7 +124,11 @@ const Users = () => {
     }
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
+    if (selectedItem === undefined) {
+      return
+    }
+    const id = setEditItem._id
     dispatch(setShowFullPageLoader(true))
     Axios.delete(BACKEND_URL + '/patients/' + id + '/?token=' + token)
       .then((res) => {
@@ -262,11 +269,10 @@ const Users = () => {
                             <span
                               className="text-danger"
                               style={{ cursor: 'pointer' }}
-                              onClick={() =>
-                                confirm('Do you want to delete this user?')
-                                  ? handleDelete(item._id)
-                                  : null
-                              }
+                              onClick={() => {
+                                selectedItem(item)
+                                setShowAlert(true)
+                              }}
                             >
                               <CIcon icon={cilTrash} />
                               Delete

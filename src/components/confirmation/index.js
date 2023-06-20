@@ -1,5 +1,6 @@
 import { CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from '@coreui/react'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Confirmation({ title, showModal, setShowModal, callback }) {
   return (
@@ -27,6 +28,12 @@ function Confirmation({ title, showModal, setShowModal, callback }) {
       </CModalFooter>
     </CModal>
   )
+}
+
+Confirmation.propTypes = {
+  callback: PropTypes.any.isRequired,
+  showModal: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.any.isRequired,
 }
 
 export default Confirmation
