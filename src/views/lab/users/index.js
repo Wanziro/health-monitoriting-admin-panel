@@ -9,6 +9,7 @@ import PlaceHolder from 'src/components/placeholder'
 import CIcon from '@coreui/icons-react'
 import { cilTrash } from '@coreui/icons'
 import FullPageLoader from 'src/components/full-page-loader'
+import Confirmation from '../../../components/confirmation'
 
 const Users = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,9 @@ const Users = () => {
   const [usersList, setUsersList] = useState([])
   const [departments, setDepartments] = useState([])
   const [keyword, setKeyword] = useState('')
+
+  const [selectedItem, setSelectedItem] = useState(undefined)
+  const [showAlert, setShowAlert] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -89,7 +93,11 @@ const Users = () => {
       })
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
+    if (selectedItem === undefined) {
+      return
+    }
+    const id = selectedItem._id
     dispatch(setShowFullPageLoader(true))
     Axios.delete(BACKEND_URL + '/users/' + id + '/?token=' + token)
       .then((res) => {
@@ -195,11 +203,10 @@ const Users = () => {
                           <td>
                             <button
                               className="btn btn-danger"
-                              onClick={() =>
-                                confirm('Do you want to delete this user?')
-                                  ? handleDelete(item._id)
-                                  : null
-                              }
+                              onClick={() => {
+                                setSelectedItem(item)
+                                setShowAlert(true)
+                              }}
                             >
                               <CIcon icon={cilTrash} />
                             </button>
@@ -291,6 +298,12 @@ const Users = () => {
         </CCol>
       </CRow>
       <FullPageLoader isLoading={isLoading} />
+      <Confirmation
+        title={`Do you want to delete ` + selectedItem?.name}
+        callback={handleDelete}
+        showModal={showAlert}
+        setShowModal={setShowAlert}
+      />
     </>
   )
 }

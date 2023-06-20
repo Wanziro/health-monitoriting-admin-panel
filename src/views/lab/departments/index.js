@@ -314,7 +314,7 @@ const Users = () => {
         title="Do you want to delete this user?"
         setShowModal={setShowAlert}
         showModal={showAlert}
-        callback={handleDelete()}
+        callback={handleDelete}
       />
     </>
   )
