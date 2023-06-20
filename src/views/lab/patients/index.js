@@ -128,7 +128,7 @@ const Users = () => {
         setTimeout(() => {
           dispatch(setShowFullPageLoader(false))
           toastMessage('success', res.data.msg)
-          fetchUsers()
+          fetPatients()
         }, 1000)
       })
       .catch((error) => {

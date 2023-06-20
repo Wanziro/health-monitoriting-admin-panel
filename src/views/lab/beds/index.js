@@ -124,7 +124,7 @@ const Users = () => {
         setTimeout(() => {
           dispatch(setShowFullPageLoader(false))
           toastMessage('success', res.data.msg)
-          fetchUsers()
+          fetchBeds()
         }, 1000)
       })
       .catch((error) => {
