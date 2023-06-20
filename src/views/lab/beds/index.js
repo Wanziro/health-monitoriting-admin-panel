@@ -11,6 +11,7 @@ import { cilPen, cilTrash } from '@coreui/icons'
 import FullPageLoader from 'src/components/full-page-loader'
 import ReactPaginate from 'react-paginate'
 import Edit from './edit'
+import Confirmation from '../../../components/confirmation'
 
 const initialState = {
   bedNumber: '',
@@ -31,6 +32,8 @@ const Users = () => {
   const [departments, setDepartments] = useState([])
 
   const [keyword, setKeyword] = useState('')
+  const [showAlert, setShowAlert] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(undefined)
 
   const changeHandler = (e) => {
     setState({ ...state, [e.target.name]: e.target.value })
@@ -117,7 +120,11 @@ const Users = () => {
     }
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
+    if (selectedItem === undefined) {
+      return
+    }
+    const id = selectedItem._id
     dispatch(setShowFullPageLoader(true))
     Axios.delete(BACKEND_URL + '/beds/' + id + '/?token=' + token)
       .then((res) => {
@@ -125,6 +132,7 @@ const Users = () => {
           dispatch(setShowFullPageLoader(false))
           toastMessage('success', res.data.msg)
           fetchBeds()
+          setSelectedItem(false)
         }, 1000)
       })
       .catch((error) => {
@@ -215,11 +223,10 @@ const Users = () => {
                             <span
                               className="text-danger"
                               style={{ cursor: 'pointer' }}
-                              onClick={() =>
-                                confirm('Do you want to delete this user?')
-                                  ? handleDelete(item._id)
-                                  : null
-                              }
+                              onClick={() => {
+                                setSelectedItem(item)
+                                setShowAlert(true)
+                              }}
                             >
                               <CIcon icon={cilTrash} />
                               Delete
@@ -320,6 +327,11 @@ const Users = () => {
         departments={departments}
       />
       <FullPageLoader isLoading={isLoading} />
+      <Confirmation
+        title="Do you want to delete this bed?"
+        showModal={showAlert}
+        setShowModal={setShowAlert}
+      />
     </>
   )
 }
