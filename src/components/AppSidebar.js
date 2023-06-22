@@ -10,7 +10,7 @@ import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
 import labNav from '../navs/lab-navigations/'
-import { setShowSideBar, setUnfoldableSideBar } from 'src/actions/app'
+import { setShowSideBar, setUnfoldableSideBar } from '../actions/app'
 
 const AppSidebar = () => {
   const dispatch = useDispatch()

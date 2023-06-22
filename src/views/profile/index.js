@@ -1,12 +1,12 @@
 import { CCard, CCardBody, CCardFooter, CCardHeader, CCol, CRow } from '@coreui/react'
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { BACKEND_URL } from 'src/constants'
-import { errorHandler, toastMessage } from 'src/helpers'
+import { BACKEND_URL } from '../../constants'
+import { errorHandler, toastMessage } from '../../helpers'
 import { useDispatch, useSelector } from 'react-redux'
-import { setShowFullPageLoader } from 'src/actions/app'
-import { setUserFullName } from 'src/actions/user'
-import FullPageLoader from 'src/components/full-page-loader'
+import { setShowFullPageLoader } from '../../actions/app'
+import { setUserFullName } from '../../actions/user'
+import FullPageLoader from '../../components/full-page-loader'
 
 function Profile() {
   const dispatch = useDispatch()

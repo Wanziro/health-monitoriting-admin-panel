@@ -15,11 +15,11 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import FullPageLoader from 'src/components/full-page-loader'
+import FullPageLoader from '../../../components/full-page-loader'
 import { useDispatch } from 'react-redux'
 import Axios from 'axios'
-import { toastMessage } from 'src/helpers'
-import { BACKEND_URL } from 'src/constants'
+import { toastMessage } from '../../../helpers'
+import { BACKEND_URL } from '../../../constants'
 import {
   setuserCompanyName,
   setUserEmail,
@@ -28,7 +28,7 @@ import {
   setUserRole,
   setUserRoleId,
   setUserToken,
-} from 'src/actions/user'
+} from '../../../actions/user'
 
 const Login = () => {
   const navigate = useNavigate()

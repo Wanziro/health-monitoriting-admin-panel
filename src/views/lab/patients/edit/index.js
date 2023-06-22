@@ -9,8 +9,8 @@ import {
 } from '@coreui/react'
 import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
-import { BACKEND_URL } from 'src/constants'
-import { errorHandler, toastMessage } from 'src/helpers'
+import { BACKEND_URL } from '../../../../constants'
+import { errorHandler, toastMessage } from '../../../../helpers'
 
 const initialState = {
   departmentId: '',

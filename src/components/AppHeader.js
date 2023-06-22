@@ -15,7 +15,7 @@ import CIcon from '@coreui/icons-react'
 import { cilBell, cilMenu } from '@coreui/icons'
 
 import { AppHeaderDropdown } from './header/index'
-import { setShowSideBar } from 'src/actions/app'
+import { setShowSideBar } from '../actions/app'
 
 const AppHeader = () => {
   const dispatch = useDispatch()

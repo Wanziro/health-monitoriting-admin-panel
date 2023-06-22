@@ -1,19 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { CCard, CCardBody, CCardFooter, CCardHeader, CCol, CRow } from '@coreui/react'
-import Axios from 'axios'
-import { errorHandler, toastMessage } from 'src/helpers'
-import { BACKEND_URL } from 'src/constants'
-import { useDispatch, useSelector } from 'react-redux'
-import { setShowFullPageLoader } from 'src/actions/app'
-import PlaceHolder from 'src/components/placeholder'
-import CIcon from '@coreui/icons-react'
-import { cilPen, cilTrash } from '@coreui/icons'
-import FullPageLoader from 'src/components/full-page-loader'
-
-const initialState = {
-  bedNumber: '',
-  departmentId: '',
-}
+import React from 'react'
+import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 
 const Instructions = () => {
   return (

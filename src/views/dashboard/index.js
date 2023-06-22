@@ -1,9 +1,8 @@
 import { CCard, CCardBody, CCol, CRow } from '@coreui/react'
 import React, { useState, useEffect } from 'react'
-import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import Axios from 'axios'
-import { BACKEND_URL } from 'src/constants'
-import { errorHandler } from 'src/helpers'
+import { BACKEND_URL } from '../../constants'
+import { errorHandler } from '../../helpers'
 import { useSelector } from 'react-redux'
 
 const Dashboard = () => {
